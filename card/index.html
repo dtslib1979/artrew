@@ -147,6 +147,13 @@
       margin-bottom: 6px;
     }
 
+    .card-byline {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+      font-style: italic;
+    }
+
     .card-tagline {
       font-size: 10px;
       letter-spacing: 0.1em;
@@ -342,7 +349,8 @@
       <!-- Brand -->
       <div class="card-brand">
         <h1 class="card-brand-name">ARTREW</h1>
-        <p class="card-tagline">Not Human. Not Machine.<br>Art.</p>
+        <p class="card-byline">by Sooha Ryu</p>
+        <p class="card-tagline">AI-Native Artist</p>
       </div>
 
       <div class="card-divider"></div>
@@ -360,8 +368,8 @@
           </a>
         </p>
         <p class="card-contact-item">
-          <a href="mailto:artrew@artrew.com">
-            <span class="card-contact-icon">✉️</span>artrew@artrew.com
+          <a href="mailto:sooha@artrew.com">
+            <span class="card-contact-icon">✉️</span>sooha@artrew.com
           </a>
         </p>
       </div>
@@ -372,7 +380,7 @@
           <span>📇</span>
           Save Contact
         </button>
-        <a href="mailto:artrew@artrew.com?subject=Contact%20ARTREW" class="card-btn primary">
+        <a href="mailto:sooha@artrew.com?subject=Contact%20ARTREW" class="card-btn primary">
           <span>✉️</span>
           Contact
         </a>
@@ -422,12 +430,12 @@
     function saveContact() {
       const vCard = `BEGIN:VCARD
 VERSION:3.0
-FN:ARTREW
+FN:Sooha Ryu
 ORG:ARTREW
-TITLE:The Standard for AI-Native Artists
-EMAIL;TYPE=WORK:artrew@artrew.com
+TITLE:AI-Native Artist
+EMAIL;TYPE=WORK:sooha@artrew.com
 URL:https://artrew.com
-NOTE:Not Human. Not Machine. Art.
+NOTE:ARTREW by Sooha Ryu
 END:VCARD`;
 
       const blob = new Blob([vCard], { type: 'text/vcard;charset=utf-8' });
