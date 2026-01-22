@@ -1,23 +1,23 @@
 {
   "articles": [
     {
-      "file": "vision-parksy.html",
-      "title": "PARKSY — The Future of Creative Production",
-      "description": "AI-Powered Visual Production Pipeline: From Sketch to Cinema",
+      "file": "vision-alexandria.html",
+      "title": "Alexandria Sanctuary Vision — Where Wisdom Meets Rest | ARTREW",
+      "description": "Supporting Father's 21st Century Sanctuary: A Place of Contemplation and Care",
       "date": "2026-01-22",
       "status": "published"
     },
     {
       "file": "vision-eae.html",
-      "title": "EAE University — The 21st Century Academy",
+      "title": "EAE University Vision — The 21st Century Academy | ARTREW",
       "description": "Founding Dean of the AI-Native University: Where Knowledge Meets Neural Networks",
       "date": "2026-01-22",
       "status": "published"
     },
     {
-      "file": "vision-alexandria.html",
-      "title": "Alexandria — Where Wisdom Meets Rest",
-      "description": "Supporting Father's 21st Century Sanctuary: A Place of Contemplation and Care",
+      "file": "vision-parksy.html",
+      "title": "PARKSY Vision — The Future of Creative Production | ARTREW",
+      "description": "AI-Powered Visual Production Pipeline: From Sketch to Cinema",
       "date": "2026-01-22",
       "status": "published"
     }
