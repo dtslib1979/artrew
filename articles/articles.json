@@ -1,6 +1,13 @@
 {
   "articles": [
     {
+      "file": "dear-sooha.html",
+      "title": "Dear Sooha — A Letter from Your Uncle | ARTREW",
+      "description": "수하에게: AI 네이티브 시대를 함께 열어갈 너에게 보내는 삼촌의 편지",
+      "date": "2026-01-22",
+      "status": "featured"
+    },
+    {
       "file": "vision-alexandria.html",
       "title": "Alexandria Sanctuary Vision — Where Wisdom Meets Rest | ARTREW",
       "description": "Supporting Father's 21st Century Sanctuary: A Place of Contemplation and Care",

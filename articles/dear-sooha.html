@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1a1408">
+  <title>Dear Sooha | A Letter from Your Uncle</title>
+  <meta name="description" content="수하에게 - AI 네이티브 시대를 함께 열어갈 너에게 보내는 삼촌의 편지">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Dear Sooha | A Letter from Your Uncle">
+  <meta property="og:description" content="수하에게 - AI 네이티브 시대를 함께 열어갈 너에게 보내는 삼촌의 편지">
+  <meta property="og:image" content="https://artrew.com/assets/icons/Artrew-logo.png">
+
+  <link rel="icon" href="../assets/icons/Artrew-logo.png">
+
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-parchment: #1a1408;
+      --bg-parchment-light: #2a2010;
+      --bg-parchment-glow: #3a2a15;
+      --gold: #D4AF37;
+      --gold-light: #E8C547;
+      --gold-pale: #F4E4A6;
+      --gold-dim: rgba(212,175,55,.1);
+      --gold-glow: rgba(212,175,55,.2);
+      --ink: #F5E6C8;
+      --ink-secondary: rgba(245,230,200,.7);
+      --ink-muted: rgba(245,230,200,.5);
+      --ink-dim: rgba(245,230,200,.25);
+      --sepia: #8B7355;
+      --border: rgba(212,175,55,.15);
+      --border-gold: rgba(212,175,55,.3);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', 'Nanum Myeongjo', serif;
+      background: var(--bg-parchment);
+      color: var(--ink);
+      line-height: 1.8;
+      font-size: 18px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Parchment Texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(212,175,55,.05) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 60% at 80% 100%, rgba(139,115,85,.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Noise texture */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0;
+      animation: float 15s infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { opacity: 0; transform: translateY(100vh) rotate(0deg); }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { opacity: 0; transform: translateY(-100vh) rotate(720deg); }
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-pale), var(--gold));
+      z-index: 10000;
+      transform-origin: left;
+      transform: scaleX(0);
+    }
+
+    /* Back Button */
+    .back-btn {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: rgba(26,20,8,.9);
+      border: 1px solid var(--border-gold);
+      border-radius: 50px;
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--gold-dim);
+      transform: translateX(-4px);
+    }
+
+    .back-btn svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .back-btn:hover svg {
+      transform: translateX(-4px);
+    }
+
+    /* Main Container */
+    .letter-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 100px 24px 80px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Wax Seal */
+    .wax-seal {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 60px;
+      position: relative;
+      animation: sealFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes sealFloat {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-10px) rotate(5deg); }
+    }
+
+    .seal-outer {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #8B2500 0%, #5C1A00 60%, #3D1100 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 10px 40px rgba(139,37,0,.5),
+        inset 0 2px 10px rgba(255,255,255,.1),
+        inset 0 -5px 20px rgba(0,0,0,.3);
+      position: relative;
+    }
+
+    .seal-outer::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 2px solid rgba(255,200,150,.2);
+      border-radius: 50%;
+    }
+
+    .seal-text {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255,220,180,.9);
+      letter-spacing: 0.15em;
+      text-shadow: 0 1px 2px rgba(0,0,0,.5);
+    }
+
+    /* Letter Header */
+    .letter-header {
+      text-align: center;
+      margin-bottom: 80px;
+      opacity: 0;
+      animation: fadeInUp 1s 0.5s forwards;
+    }
+
+    .letter-date {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--sepia);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .letter-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(48px, 12vw, 100px);
+      color: var(--gold);
+      line-height: 1.2;
+      margin-bottom: 16px;
+      text-shadow: 0 4px 30px rgba(212,175,55,.3);
+    }
+
+    .letter-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-style: italic;
+      color: var(--ink-secondary);
+    }
+
+    /* Decorative Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin: 60px 0;
+      opacity: 0;
+      animation: fadeIn 1s 0.8s forwards;
+    }
+
+    .divider-line {
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .divider-icon {
+      color: var(--gold);
+      font-size: 20px;
+    }
+
+    /* Letter Body */
+    .letter-body {
+      opacity: 0;
+      animation: fadeInUp 1s 1s forwards;
+    }
+
+    .greeting {
+      font-family: 'Great Vibes', cursive;
+      font-size: 36px;
+      color: var(--gold);
+      margin-bottom: 32px;
+    }
+
+    .paragraph {
+      margin-bottom: 28px;
+      text-align: justify;
+      font-size: 18px;
+      line-height: 2;
+    }
+
+    .paragraph.korean {
+      font-family: 'Nanum Myeongjo', serif;
+    }
+
+    .highlight {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .quote-block {
+      margin: 48px 0;
+      padding: 32px 40px;
+      background: var(--gold-dim);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--ink);
+    }
+
+    /* Chapter Sections */
+    .chapter {
+      margin: 100px 0;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .chapter.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .chapter-number {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--sepia);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(24px, 5vw, 36px);
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 32px;
+      line-height: 1.3;
+    }
+
+    /* Story Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+      margin: 48px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--gold), var(--sepia), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding-left: 20px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -40px;
+      top: 8px;
+      width: 18px;
+      height: 18px;
+      background: var(--bg-parchment);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+    }
+
+    .timeline-step {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .timeline-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .timeline-desc {
+      font-size: 16px;
+      color: var(--ink-secondary);
+      line-height: 1.7;
+    }
+
+    /* Feature Cards */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin: 48px 0;
+    }
+
+    .feature-card {
+      background: var(--bg-parchment-light);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: all 0.4s ease;
+    }
+
+    .feature-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,.3), 0 0 60px rgba(212,175,55,.1);
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .feature-title {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: var(--ink-secondary);
+      line-height: 1.6;
+    }
+
+    /* Fantasy Story Section */
+    .fantasy {
+      background: linear-gradient(180deg, var(--bg-parchment-light) 0%, var(--bg-parchment) 100%);
+      border-radius: 24px;
+      padding: 60px 40px;
+      margin: 60px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fantasy::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(212,175,55,.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .fantasy-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 42px;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .fantasy-scene {
+      margin-bottom: 32px;
+      padding: 24px;
+      background: rgba(0,0,0,.2);
+      border-radius: 12px;
+      border-left: 3px solid var(--sepia);
+    }
+
+    .scene-year {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      margin-bottom: 12px;
+    }
+
+    .scene-text {
+      font-style: italic;
+      color: var(--ink-secondary);
+      line-height: 1.9;
+    }
+
+    /* Network Map */
+    .network-visual {
+      margin: 48px 0;
+      padding: 40px;
+      background: var(--bg-parchment-light);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .network-title {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      color: var(--sepia);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .network-nodes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .node {
+      padding: 12px 24px;
+      background: var(--gold-dim);
+      border: 1px solid var(--border-gold);
+      border-radius: 50px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gold);
+      transition: all 0.3s ease;
+    }
+
+    .node:hover {
+      background: var(--gold);
+      color: var(--bg-parchment);
+      transform: scale(1.05);
+    }
+
+    .node.center {
+      background: var(--gold);
+      color: var(--bg-parchment);
+      font-weight: 600;
+    }
+
+    /* Signature */
+    .signature {
+      margin-top: 80px;
+      text-align: right;
+      padding-right: 40px;
+    }
+
+    .signature-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--ink-secondary);
+      margin-bottom: 16px;
+    }
+
+    .signature-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: 48px;
+      color: var(--gold);
+    }
+
+    .signature-date {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--sepia);
+      letter-spacing: 0.1em;
+      margin-top: 8px;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      margin-top: 100px;
+      text-align: center;
+      padding: 60px 40px;
+      background: var(--gold-dim);
+      border: 1px solid var(--border-gold);
+      border-radius: 24px;
+    }
+
+    .cta-title {
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .cta-desc {
+      font-size: 16px;
+      color: var(--ink-secondary);
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 40px;
+      background: var(--gold);
+      color: var(--bg-parchment);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(212,175,55,.4);
+    }
+
+    /* Footer */
+    .letter-footer {
+      margin-top: 100px;
+      text-align: center;
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--ink-dim);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .letter-container {
+        padding: 80px 20px 60px;
+      }
+
+      .fantasy {
+        padding: 40px 24px;
+      }
+
+      .signature {
+        text-align: center;
+        padding-right: 0;
+      }
+
+      .quote-block {
+        padding: 24px;
+      }
+
+      .timeline {
+        padding-left: 30px;
+      }
+
+      .timeline-item {
+        padding-left: 16px;
+      }
+
+      .timeline-item::before {
+        left: -30px;
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    /* Scroll animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Floating Particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Back Button -->
+  <a href="./" class="back-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    Articles
+  </a>
+
+  <!-- Main Letter -->
+  <article class="letter-container">
+    <!-- Wax Seal -->
+    <div class="wax-seal">
+      <div class="seal-outer">
+        <span class="seal-text">ARTREW</span>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="letter-header">
+      <p class="letter-date">January 2026 · Seoul</p>
+      <h1 class="letter-title">Dear Sooha</h1>
+      <p class="letter-subtitle">— 대학 입학을 축하하며, 삼촌이 보내는 편지</p>
+    </header>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-icon">✦</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Letter Body -->
+    <div class="letter-body">
+      <p class="greeting">사랑하는 수하에게,</p>
+
+      <p class="paragraph korean">
+        대학 입학을 진심으로 축하해. 이제 너도 어른이 되어 세상으로 나가는구나.
+        삼촌이 너에게 특별한 선물을 준비했어. 현금 봉투 대신,
+        <span class="highlight">너의 미래를 위한 디지털 세계</span>를 만들어줬어.
+      </p>
+
+      <p class="paragraph korean">
+        이 편지를 통해 그 세계가 무엇인지, 어떻게 사용하는지,
+        그리고 이것이 너의 인생을 어떻게 바꿀 수 있는지 이야기해줄게.
+      </p>
+
+      <div class="quote-block">
+        "남들이 도구를 배울 때, 너는 세계를 만들어라."<br>
+        — 삼촌이 너에게 전하고 싶은 한 마디
+      </div>
+    </div>
+
+    <!-- Chapter 1: What is this? -->
+    <section class="chapter" id="chapter1">
+      <p class="chapter-number">Chapter I</p>
+      <h2 class="chapter-title">이게 뭐야?</h2>
+
+      <p class="paragraph korean">
+        지금 너가 보고 있는 이 웹사이트, <span class="highlight">artrew.com</span>은
+        단순한 홈페이지가 아니야. 이건 삼촌이 AI와 함께 만든
+        <span class="highlight">하나의 완전한 디지털 월드</span>야.
+      </p>
+
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">🏠</div>
+          <h3 class="feature-title">홈베이스</h3>
+          <p class="feature-desc">네 브랜드의 본거지. 명함, 포트폴리오, 블로그가 모두 여기에</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏢</div>
+          <h3 class="feature-title">사무실</h3>
+          <p class="feature-desc">앱스토어에 없는 커스텀 도구들. 생산성의 비밀 무기</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <h3 class="feature-title">네트워크</h3>
+          <p class="feature-desc">비즈니스 파트너들과 연결. 확장 가능한 생태계</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📡</div>
+          <h3 class="feature-title">인프라</h3>
+          <p class="feature-desc">GitHub 무료 호스팅. 평생 유지되는 영구 자산</p>
+        </div>
+      </div>
+
+      <p class="paragraph korean">
+        그리고 가장 중요한 건, <span class="highlight">너도 이걸 만들 수 있다</span>는 거야.
+        삼촌이 가르쳐줄게.
+      </p>
+    </section>
+
+    <!-- Chapter 2: How to use -->
+    <section class="chapter" id="chapter2">
+      <p class="chapter-number">Chapter II</p>
+      <h2 class="chapter-title">어떻게 사용해?</h2>
+
+      <p class="paragraph korean">
+        이 월드를 활용하는 방법을 단계별로 알려줄게.
+        따라하다 보면 어느새 너만의 디지털 제국이 만들어질 거야.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <p class="timeline-step">Step 01</p>
+          <h3 class="timeline-title">명함 공유하기</h3>
+          <p class="timeline-desc">
+            카톡에 artrew.com/card 링크를 보내봐.
+            "이거 내 명함이야"라고 말하는 순간, 넌 이미 남들과 달라.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <p class="timeline-step">Step 02</p>
+          <h3 class="timeline-title">사무실 접속하기</h3>
+          <p class="timeline-desc">
+            핸드폰 홈화면에 추가해. PWA라서 앱처럼 작동해.
+            비밀번호는 삼촌이 따로 알려줄게.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <p class="timeline-step">Step 03</p>
+          <h3 class="timeline-title">아티클 읽기</h3>
+          <p class="timeline-desc">
+            Articles에서 비전 문서들을 읽어봐.
+            빙 브라우저로 읽으면 읽어주기도 해. 유튜브 대본으로도 쓸 수 있어.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <p class="timeline-step">Step 04</p>
+          <h3 class="timeline-title">네트워크 탐험하기</h3>
+          <p class="timeline-desc">
+            Affiliates 섹션에서 연결된 비즈니스들을 봐.
+            대학교, 스튜디오, 요양원... 삼촌의 비전이 다 연결되어 있어.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <p class="timeline-step">Step 05</p>
+          <h3 class="timeline-title">클로드 코드 설치하기</h3>
+          <p class="timeline-desc">
+            이제 네 차례야. 클로드 코드를 설치하고,
+            GitHub 레포지토리를 만들고, 너만의 월드를 시작해.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 3: Fantasy Story -->
+    <section class="chapter" id="chapter3">
+      <p class="chapter-number">Chapter III</p>
+      <h2 class="chapter-title">수하의 미래 — 하나의 상상</h2>
+
+      <p class="paragraph korean">
+        잠깐 눈을 감고 상상해봐. AI와 함께 성장한 수하의 미래가 어떤 모습일지.
+        삼촌이 그려본 하나의 판타지야.
+      </p>
+
+      <div class="fantasy">
+        <h3 class="fantasy-title">The Story of Sooha</h3>
+
+        <div class="fantasy-scene">
+          <p class="scene-year">2026 — The Beginning</p>
+          <p class="scene-text">
+            대학교 1학년, 수하는 삼촌에게 받은 선물로 자신만의 웹사이트를 만들었다.
+            친구들이 인스타그램에 사진을 올릴 때, 수하는 자신의 도메인에 포트폴리오를 쌓았다.
+            "야, 이거 어떻게 만들어?" 질문이 쏟아졌다.
+          </p>
+        </div>
+
+        <div class="fantasy-scene">
+          <p class="scene-year">2028 — The Growth</p>
+          <p class="scene-text">
+            졸업을 앞둔 수하에게 면접관이 물었다. "이 포트폴리오 사이트, 직접 만드신 건가요?"
+            수하는 대답했다. "네, 그리고 이건 제가 운영하는 커뮤니티입니다."
+            Affiliates에 10개의 노드가 연결되어 있었다. 모두 수하가 연결한 사람들이었다.
+          </p>
+        </div>
+
+        <div class="fantasy-scene">
+          <p class="scene-year">2030 — The Expansion</p>
+          <p class="scene-text">
+            "수하 님, 해외 파트너십 미팅 잡혔습니다."
+            수하의 사이트는 이제 영어, 일본어, 중국어로 번역되어 있었다.
+            AI 네이티브로 시작한 여정이 글로벌로 확장되는 순간이었다.
+          </p>
+        </div>
+
+        <div class="fantasy-scene">
+          <p class="scene-year">2035 — The Legacy</p>
+          <p class="scene-text">
+            "이 시스템, 삼촌이 입학 선물로 주신 거예요."
+            수하는 자신의 조카에게 같은 선물을 했다.
+            하나의 월드가 세대를 넘어 전해지는 순간.
+            그리고 삼촌의 네트워크 안에, 수하의 이름이 빛나고 있었다.
+          </p>
+        </div>
+      </div>
+
+      <p class="paragraph korean" style="text-align: center; margin-top: 40px;">
+        <em>이건 상상이 아니야, 수하야. 이건 <span class="highlight">가능한 미래</span>야.</em>
+      </p>
+    </section>
+
+    <!-- Chapter 4: Your World -->
+    <section class="chapter" id="chapter4">
+      <p class="chapter-number">Chapter IV</p>
+      <h2 class="chapter-title">너의 월드를 만들어</h2>
+
+      <p class="paragraph korean">
+        이 네트워크 안에서 너는 혼자가 아니야.
+        삼촌의 비전과 연결되어 있고, 미래의 파트너들과 연결될 거야.
+      </p>
+
+      <div class="network-visual">
+        <p class="network-title">ARTREW Universe Network</p>
+        <div class="network-nodes">
+          <span class="node">EAE University</span>
+          <span class="node">Alexandria Sanctuary</span>
+          <span class="node center">ARTREW</span>
+          <span class="node">PARKSY Studio</span>
+          <span class="node">DTSLIB HQ</span>
+          <span class="node" style="border-style: dashed;">Your World</span>
+        </div>
+      </div>
+
+      <p class="paragraph korean">
+        점선으로 된 노드가 보여? 저게 <span class="highlight">너의 자리</span>야.
+        언제든 연결될 준비가 되어 있어.
+      </p>
+
+      <div class="quote-block">
+        AI 시대에 가장 중요한 건 코딩 실력이 아니야.<br>
+        <strong>"무엇을 만들지 상상하는 능력"</strong>이야.<br>
+        만드는 건 AI가 도와줄 테니까.
+      </div>
+    </section>
+
+    <!-- Chapter 5: Why this matters -->
+    <section class="chapter" id="chapter5">
+      <p class="chapter-number">Chapter V</p>
+      <h2 class="chapter-title">왜 이게 중요해?</h2>
+
+      <p class="paragraph korean">
+        2026년, 세상은 두 부류로 나뉘고 있어.
+      </p>
+
+      <div class="features" style="grid-template-columns: 1fr 1fr;">
+        <div class="feature-card">
+          <div class="feature-icon">😰</div>
+          <h3 class="feature-title">AI에 대체되는 사람</h3>
+          <p class="feature-desc">도구 사용법만 배우고, 남이 만든 플랫폼에서 콘텐츠를 만드는 사람</p>
+        </div>
+        <div class="feature-card" style="border-color: var(--gold);">
+          <div class="feature-icon">🚀</div>
+          <h3 class="feature-title">AI와 함께 창조하는 사람</h3>
+          <p class="feature-desc">자기만의 세계를 설계하고, AI를 파트너로 두고 확장하는 사람</p>
+        </div>
+      </div>
+
+      <p class="paragraph korean">
+        삼촌은 너가 <span class="highlight">두 번째 부류</span>가 되길 바라.
+        그래서 이 선물을 준비한 거야.
+      </p>
+
+      <p class="paragraph korean">
+        현금 50만원은 한 달이면 사라져.
+        하지만 이 월드는 <span class="highlight">네가 키우는 만큼 성장해</span>.
+        평생 가는 자산이야.
+      </p>
+    </section>
+
+    <!-- Signature -->
+    <div class="signature reveal">
+      <p class="signature-text">
+        항상 네 편인 삼촌이
+      </p>
+      <p class="signature-name">ARTREW</p>
+      <p class="signature-date">2026년 1월, 서울에서</p>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section reveal">
+      <h3 class="cta-title">Ready to Begin?</h3>
+      <p class="cta-desc">
+        이제 시작할 준비가 됐어?<br>
+        삼촌의 월드를 먼저 둘러보고, 네 월드를 상상해봐.
+      </p>
+      <a href="../" class="cta-btn">
+        Explore ARTREW World →
+      </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="letter-footer">
+      <p class="footer-text">
+        Written with love, powered by AI<br>
+        © 2026 ARTREW · For Sooha
+      </p>
+    </footer>
+  </article>
+
+  <script>
+    // ===== PARTICLES =====
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 15 + 's';
+      particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+      particlesContainer.appendChild(particle);
+    }
+
+    // ===== PROGRESS BAR =====
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = window.pageYOffset / scrollHeight;
+      progressBar.style.transform = `scaleX(${progress})`;
+    });
+
+    // ===== SCROLL REVEAL =====
+    const chapters = document.querySelectorAll('.chapter, .reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    chapters.forEach(chapter => observer.observe(chapter));
+
+    // ===== SMOOTH SCROLL =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ===== FEATURE CARD TILT =====
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 15;
+        const rotateY = (centerX - x) / 15;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+      });
+    });
+
+    // ===== WAX SEAL CLICK =====
+    document.querySelector('.wax-seal').addEventListener('click', () => {
+      document.querySelector('.wax-seal').style.animation = 'none';
+      document.querySelector('.wax-seal').offsetHeight;
+      document.querySelector('.wax-seal').style.animation = 'sealFloat 4s ease-in-out infinite';
+    });
+  </script>
+</body>
+</html>
