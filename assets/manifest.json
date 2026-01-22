@@ -1,0 +1,30 @@
+{
+  "name": "ARTREW",
+  "short_name": "ARTREW",
+  "description": "ARTREW ≡ Built on Gold. Measured in Silver.",
+  "start_url": "/artrew/",
+  "display": "browser",
+  "background_color": "#0a1f1a",
+  "theme_color": "#D4AF37",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "1.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "1.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "1.jpg",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

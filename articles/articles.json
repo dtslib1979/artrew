@@ -1,0 +1,25 @@
+{
+  "articles": [
+    {
+      "file": "1500.html",
+      "title": "1500원 환율 시대가 시사하는 바",
+      "description": "",
+      "date": "2026-01-16",
+      "status": "published"
+    },
+    {
+      "file": "investor-deck.html",
+      "title": "ARTREW — Investor Deck",
+      "description": "ARTREW - Real Money, Real World | Bluffing based editing broadcasting CELEB story",
+      "date": "2026-01-16",
+      "status": "draft"
+    },
+    {
+      "file": "실버90.html",
+      "title": "Artrew Manifesto — Built on Gold. Measured in Silver",
+      "description": "Artrew Manifesto — Built on Gold. Measured in Silver",
+      "date": "2026-01-16",
+      "status": "published"
+    }
+  ]
+}
