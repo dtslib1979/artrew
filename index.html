@@ -207,19 +207,19 @@
       z-index: 2;
     }
 
-    .logo iframe {
+    .logo video {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      border: none;
+      object-fit: cover;
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.8s ease;
     }
 
-    .logo iframe.playing { opacity: 1; }
+    .logo video.playing { opacity: 1; }
 
     .logo-poster {
       position: absolute;
@@ -1897,41 +1897,21 @@
   <header>
     <div class="slogan">Real Art, Real Brand</div>
     <div class="logo" role="img" aria-label="ARTREW 로고">
-      <div class="logo-poster" id="logoPoster">
-        <img src="https://img.youtube.com/vi/swcsHAL06xY/maxresdefault.jpg" alt="" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <iframe id="logoVideo" src="https://www.youtube.com/embed/swcsHAL06xY?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=swcsHAL06xY&controls=0&showinfo=0&modestbranding=1&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <div class="logo-poster" id="logoPoster"></div>
+      <video id="logoVideo" autoplay muted loop playsinline>
+        <source src="./assets/1768385736790.mp4" type="video/mp4">
+      </video>
     </div>
     <script>
-      var tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.head.appendChild(tag);
-      var logoPlayer;
-      function onYouTubeIframeAPIReady() {
-        logoPlayer = new YT.Player('logoVideo', {
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
-        });
-      }
-      function onPlayerStateChange(e) {
-        if (e.data === YT.PlayerState.PLAYING) {
-          document.getElementById('logoVideo').classList.add('playing');
-          document.getElementById('logoPoster').classList.add('hidden');
-        }
-      }
-      function onPlayerReady(e) {
-        setInterval(function() {
-          if (logoPlayer && logoPlayer.getDuration && logoPlayer.getCurrentTime) {
-            var dur = logoPlayer.getDuration();
-            var cur = logoPlayer.getCurrentTime();
-            if (dur > 0 && cur >= dur - 1) {
-              logoPlayer.seekTo(0);
-            }
-          }
-        }, 500);
-      }
+      const logoVideo = document.getElementById('logoVideo');
+      const logoPoster = document.getElementById('logoPoster');
+      logoVideo.addEventListener('canplay', function() {
+        logoVideo.classList.add('playing');
+        logoPoster.classList.add('hidden');
+      });
+      logoVideo.addEventListener('loadeddata', function() {
+        logoVideo.play().catch(e => console.log('Autoplay prevented'));
+      });
     </script>
     <h1 class="site-title">ARTREW</h1>
   </header>
