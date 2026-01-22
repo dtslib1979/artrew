@@ -2,10 +2,10 @@
   "articles": [
     {
       "file": "dear-sooha.html",
-      "title": "Dear Sooha — A Letter from Your Uncle | ARTREW",
-      "description": "수하에게: AI 네이티브 시대를 함께 열어갈 너에게 보내는 삼촌의 편지",
+      "title": "Dear Sooha | A Letter from Your Uncle",
+      "description": "수하에게 - AI 네이티브 시대를 함께 열어갈 너에게 보내는 삼촌의 편지",
       "date": "2026-01-22",
-      "status": "featured"
+      "status": "published"
     },
     {
       "file": "vision-alexandria.html",
