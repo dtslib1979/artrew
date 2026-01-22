@@ -2,389 +2,1738 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARTREW | Business Columnist & Info Recycle Biz</title>
-  <meta name="description" content="ARTREW - Business Columnist, Info Recycle Biz">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#040806">
+  <title>ARTREW | AI-Native Artist — The Future of Art</title>
+  <meta name="description" content="AI 시대의 새로운 아티스트, ARTREW. 스튜디오, 대학교, 글로벌 비즈니스의 꿈을 현실로.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ARTREW | AI-Native Artist">
+  <meta property="og:description" content="AI 시대의 새로운 아티스트, 꿈을 현실로 만드는 여정">
+  <meta property="og:image" content="https://artrew.com/assets/icons/profile.jpg">
+
   <link rel="icon" href="../assets/icons/Artrew-logo.png">
   <link rel="apple-touch-icon" href="../assets/icons/Artrew-logo.png">
+
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #0F1F15;
-      --bg-elevated: #1A2E22;
-      --bg-card: #243529;
-      --accent: #D4AF37;
+      --bg: #040806;
+      --bg-elevated: #0a110d;
+      --bg-card: #0e1812;
+      --bg-glass: rgba(10,17,13,.85);
+      --accent: #2D8B57;
       --gold: #D4AF37;
-      --text: #F5F5F0;
-      --text-secondary: rgba(245,245,240,.7);
-      --text-muted: rgba(245,245,240,.5);
-      --border: rgba(245,245,240,.1);
-      --border-gold: rgba(212,175,55,.3);
+      --gold-light: #E8C547;
+      --gold-pale: #F4E4A6;
+      --gold-dim: rgba(212,175,55,.08);
+      --gold-glow: rgba(212,175,55,.15);
+      --text: #FAFAF8;
+      --text-secondary: rgba(250,250,248,.75);
+      --text-muted: rgba(250,250,248,.5);
+      --text-dim: rgba(250,250,248,.25);
+      --border: rgba(250,250,248,.08);
+      --border-gold: rgba(212,175,55,.25);
+      --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F4E4A6 50%, #D4AF37 100%);
+      --gradient-dark: linear-gradient(180deg, var(--bg) 0%, var(--bg-elevated) 100%);
+
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
-      line-height: 1.6;
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
     }
 
-    .container {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 20px;
-      padding-bottom: 100px;
+    /* Custom Cursor */
+    .cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      transform: translate(-50%, -50%);
     }
 
-    .back-link {
-      display: inline-flex;
+    .cursor-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor.hover {
+      transform: translate(-50%, -50%) scale(2);
+      background: rgba(212,175,55,.1);
+    }
+
+    @media (max-width: 768px) {
+      .cursor, .cursor-dot { display: none; }
+      body { cursor: auto; }
+    }
+
+    /* Particle Canvas */
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Noise Overlay */
+    .noise {
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* Loading Screen */
+    .loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
       align-items: center;
-      gap: 8px;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 14px;
-      margin-bottom: 24px;
-      transition: color 0.2s;
+      justify-content: center;
+      z-index: 100000;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
     }
 
-    .back-link:hover {
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .loader-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .loader-bar {
+      width: 200px;
+      height: 2px;
+      background: var(--border);
+      margin-top: 24px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .loader-progress {
+      height: 100%;
+      background: var(--gradient-gold);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Main Container */
+    .main-container {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(4,8,6,.7);
+      border-bottom: 1px solid var(--border);
+      transform: translateY(-100%);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav.visible {
+      transform: translateY(0);
+    }
+
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
       color: var(--gold);
     }
 
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-link {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--gold);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
     .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 24px;
       text-align: center;
-      padding: 40px 20px;
-      background: var(--bg-elevated);
-      border: 2px solid var(--gold);
-      border-radius: 20px;
-      margin-bottom: 24px;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(212,175,55,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 60% at 20% 100%, rgba(45,139,87,.05) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 60% at 80% 100%, rgba(212,175,55,.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 20px;
+      background: var(--gold-dim);
+      border: 1px solid var(--border-gold);
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s 0.5s forwards;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(48px, 12vw, 120px);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      margin-bottom: 24px;
+      background: var(--gradient-gold);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite, fadeInUp 0.8s 0.7s forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 4vw, 28px);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s 0.9s forwards;
+    }
+
+    .hero-tagline {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s 1.1s forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 48px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s 1.3s forwards;
+    }
+
+    .btn {
+      padding: 16px 36px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(212,175,55,.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeIn 1s 2s forwards;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(180deg, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(0.5); opacity: 0.5; }
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Section Base */
+    section {
+      padding: 120px 24px;
+      position: relative;
+    }
+
+    .section-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      padding: 8px 16px;
+      border: 1px solid var(--border-gold);
+      border-radius: 4px;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* Vision Section */
+    .vision {
+      background: var(--bg-elevated);
+    }
+
+    .vision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .vision-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    .vision-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 70%);
+      height: 3px;
+      background: var(--gradient-gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .hero-icon {
-      font-size: 72px;
-      margin-bottom: 16px;
-      position: relative;
-    }
-
-    .hero-title {
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 8px;
-      position: relative;
-    }
-
-    .hero-subtitle {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-      position: relative;
-    }
-
-    .hero-badges {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      position: relative;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: rgba(212, 175, 55, 0.2);
-      color: var(--gold);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .section {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 16px;
-    }
-
-    .section.highlight {
+    .vision-card:hover {
+      transform: translateY(-8px);
       border-color: var(--border-gold);
+      box-shadow: 0 30px 60px rgba(0,0,0,.4), 0 0 80px rgba(212,175,55,.1);
     }
 
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
+    .vision-card:hover::before {
+      transform: scaleX(1);
     }
 
-    .section-icon {
-      font-size: 24px;
-    }
-
-    .section-title {
-      font-size: 16px;
+    .vision-number {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 64px;
       font-weight: 700;
-      color: var(--gold);
+      color: var(--gold-dim);
+      line-height: 1;
     }
 
-    .section-desc {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-
-    /* Business Items */
-    .biz-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .biz-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      transition: all 0.2s;
-      cursor: pointer;
-    }
-
-    .biz-item:hover {
-      border-color: var(--gold);
-      transform: translateX(4px);
-    }
-
-    .biz-icon {
-      width: 48px;
-      height: 48px;
-      background: rgba(212,175,55,0.15);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      flex-shrink: 0;
-    }
-
-    .biz-content {
-      flex: 1;
-    }
-
-    .biz-name {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .biz-desc {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .biz-arrow {
-      color: var(--gold);
-      font-size: 18px;
-    }
-
-    /* Columnist Section */
-    .columnist-card {
-      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+    .vision-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--gold-dim);
       border: 1px solid var(--border-gold);
       border-radius: 16px;
-      padding: 24px;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 24px;
     }
 
-    .columnist-title {
-      font-size: 18px;
-      font-weight: 700;
+    .vision-title {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .vision-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    /* AI Native Section */
+    .ai-native {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ai-native-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 50%, rgba(212,175,55,.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 50%, rgba(45,139,87,.08) 0%, transparent 50%);
+    }
+
+    .ai-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .ai-showcase {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    .ai-visual {
+      position: relative;
+      aspect-ratio: 1;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .ai-orb {
+      position: absolute;
+      inset: 20%;
+      background:
+        radial-gradient(circle, rgba(212,175,55,.3) 0%, rgba(212,175,55,.05) 50%, transparent 70%);
+      border-radius: 50%;
+      animation: orbPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes orbPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .ai-ring {
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--border-gold);
+      border-radius: 50%;
+      animation: ringRotate 20s linear infinite;
+    }
+
+    .ai-ring:nth-child(2) {
+      inset: 10%;
+      animation-duration: 25s;
+      animation-direction: reverse;
+    }
+
+    .ai-ring:nth-child(3) {
+      inset: 20%;
+      animation-duration: 30s;
+    }
+
+    @keyframes ringRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .ai-center {
+      position: absolute;
+      inset: 35%;
+      background: var(--bg-card);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 60px rgba(212,175,55,.3);
+    }
+
+    .ai-center span {
+      font-size: 48px;
+    }
+
+    .ai-content {
+      padding: 20px 0;
+    }
+
+    .ai-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .ai-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    .ai-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 32px;
+    }
+
+    .ai-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .ai-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .ai-feature:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .ai-feature span {
+      font-size: 16px;
+    }
+
+    /* Journey Section - Timeline */
+    .journey {
+      background: var(--bg);
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--gold), var(--border));
+      transform: translateX(-50%);
+    }
+
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 20px;
+      }
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        flex-direction: row;
+        padding-left: 60px;
+      }
+    }
+
+    .timeline-content {
+      width: 45%;
+      padding: 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      transition: all 0.5s ease;
+    }
+
+    .timeline-content:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,.3);
+    }
+
+    @media (max-width: 768px) {
+      .timeline-content {
+        width: 100%;
+      }
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      top: 32px;
+      width: 20px;
+      height: 20px;
+      background: var(--bg);
+      border: 3px solid var(--gold);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-dot {
+        left: 20px;
+      }
+    }
+
+    .timeline-year {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      font-weight: 600;
       color: var(--gold);
       margin-bottom: 8px;
     }
 
-    .columnist-desc {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
+    .timeline-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
     }
 
-    .columnist-topics {
+    .timeline-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Philosophy Section */
+    .philosophy {
+      background: var(--bg-elevated);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .philosophy-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 100% 100% at 50% 100%, rgba(212,175,55,.08) 0%, transparent 60%);
+    }
+
+    .philosophy-quote {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 120px;
+      line-height: 1;
+      color: var(--gold);
+      opacity: 0.2;
+      margin-bottom: -40px;
+    }
+
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 5vw, 40px);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .quote-author {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    /* Legacy Section */
+    .legacy {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-elevated) 100%);
+    }
+
+    .legacy-card {
+      max-width: 700px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 24px;
+      padding: 60px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .legacy-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(212,175,55,.1) 0%, transparent 60%);
+    }
+
+    .legacy-icon {
+      font-size: 64px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .legacy-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .legacy-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      max-width: 500px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .legacy-decoration {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
       gap: 8px;
+      margin-top: 32px;
+      position: relative;
     }
 
-    .topic-chip {
+    .legacy-decoration span {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    .legacy-decoration span:nth-child(2) {
+      opacity: 1;
+    }
+
+    /* Stats Section */
+    .stats {
+      padding: 80px 24px;
       background: var(--bg);
-      border: 1px solid var(--border);
-      padding: 6px 12px;
-      border-radius: 16px;
-      font-size: 11px;
-      color: var(--text-secondary);
     }
 
-    /* Stats */
-    .stats-row {
+    .stats-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .stat-item {
       text-align: center;
-      padding: 12px;
+      padding: 32px 16px;
       background: var(--bg-card);
-      border-radius: 12px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      transition: all 0.4s ease;
+    }
+
+    .stat-item:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-4px);
     }
 
     .stat-value {
-      font-size: 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 36px;
       font-weight: 700;
       color: var(--gold);
+      margin-bottom: 8px;
     }
 
     .stat-label {
-      font-size: 10px;
+      font-size: 12px;
       color: var(--text-muted);
-      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
-    .cta-btn {
-      display: block;
-      width: 100%;
-      padding: 16px;
+    /* Contact Section */
+    .contact {
+      padding: 120px 24px;
+      background: var(--bg-elevated);
+      text-align: center;
+    }
+
+    .contact-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(32px, 6vw, 48px);
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .contact-text {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 48px;
       background: var(--gold);
       color: var(--bg);
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
-      text-align: center;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
       text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-top: 24px;
+      border-radius: 50px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .cta-btn:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
+    .contact-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(212,175,55,.4);
+    }
+
+    /* Footer */
+    footer {
+      padding: 60px 24px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .footer-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-link {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--gold);
+    }
+
+    .footer-copyright {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* Scroll Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* Typing Effect */
+    .typing-text {
+      display: inline;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1em;
+      background: var(--gold);
+      margin-left: 4px;
+      animation: cursorBlink 1s step-end infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      width: 32px;
+      height: 32px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mobile-menu-btn span {
+      width: 100%;
+      height: 2px;
+      background: var(--text);
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* Parallax helper */
+    .parallax {
+      will-change: transform;
+    }
+
+    /* Glow effect on hover */
+    .glow-hover {
+      transition: box-shadow 0.4s ease;
+    }
+
+    .glow-hover:hover {
+      box-shadow: 0 0 80px rgba(212,175,55,.2);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a href="../" class="back-link">← Home</a>
-
-    <div class="hero">
-      <div class="hero-icon">🪙</div>
-      <h1 class="hero-title">ARTREW</h1>
-      <p class="hero-subtitle">Real Art, Real Brand</p>
-      <div class="hero-badges">
-        <span class="hero-badge">Business Columnist</span>
-        <span class="hero-badge">Info Recycle Biz</span>
+  <!-- Loading Screen -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="loader-logo">ARTREW</div>
+      <div class="loader-bar">
+        <div class="loader-progress" id="loader-progress"></div>
       </div>
     </div>
-
-    <!-- Business Columnist -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">✍️</span>
-        <h2 class="section-title">Business Columnist</h2>
-      </div>
-      <div class="columnist-card">
-        <div class="columnist-title">경제 & 비즈니스 칼럼</div>
-        <p class="columnist-desc">실물 경제와 투자에 대한 인사이트를 전달합니다</p>
-        <div class="columnist-topics">
-          <span class="topic-chip">경제 트렌드</span>
-          <span class="topic-chip">투자 전략</span>
-          <span class="topic-chip">비즈니스 분석</span>
-          <span class="topic-chip">자산 관리</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Info Recycle Biz -->
-    <div class="section highlight">
-      <div class="section-header">
-        <span class="section-icon">♻️</span>
-        <h2 class="section-title">Info Recycle Biz</h2>
-      </div>
-      <p class="section-desc">
-        정보를 수집하고, 가공하고, 재생산하여 가치를 창출하는 비즈니스 모델
-      </p>
-
-      <div class="biz-grid">
-        <!-- 바이럴 마케팅 -->
-        <div class="biz-item">
-          <div class="biz-icon">📣</div>
-          <div class="biz-content">
-            <div class="biz-name">바이럴 마케팅</div>
-            <div class="biz-desc">SNS 기반 콘텐츠 확산 전략. 자연스러운 입소문으로 브랜드 인지도 상승</div>
-          </div>
-          <span class="biz-arrow">→</span>
-        </div>
-
-        <!-- YouTube 쇼츠 대량생산 -->
-        <div class="biz-item">
-          <div class="biz-icon">🎬</div>
-          <div class="biz-content">
-            <div class="biz-name">YouTube 쇼츠 대량생산</div>
-            <div class="biz-desc">AI 기반 숏폼 콘텐츠 자동화 생산 시스템. 효율적인 콘텐츠 스케일링</div>
-          </div>
-          <span class="biz-arrow">→</span>
-        </div>
-
-        <!-- 로머트리얼 간접 투자 -->
-        <div class="biz-item">
-          <div class="biz-icon">🥇</div>
-          <div class="biz-content">
-            <div class="biz-name">로머트리얼 간접 투자</div>
-            <div class="biz-desc">금, 은 등 원자재 간접 투자 전략. 실물 자산 기반 포트폴리오 구성</div>
-          </div>
-          <span class="biz-arrow">→</span>
-        </div>
-      </div>
-
-      <div class="stats-row">
-        <div class="stat-item">
-          <div class="stat-value">3</div>
-          <div class="stat-label">사업 영역</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value">AI</div>
-          <div class="stat-label">자동화 기반</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value">24/7</div>
-          <div class="stat-label">운영 시스템</div>
-        </div>
-      </div>
-    </div>
-
-    <a href="../articles/" class="cta-btn">칼럼 보러가기</a>
   </div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursor-dot"></div>
+
+  <!-- Particle Canvas -->
+  <canvas id="particles"></canvas>
+
+  <!-- Noise Overlay -->
+  <div class="noise"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="../" class="nav-logo">ARTREW</a>
+    <div class="nav-links">
+      <a href="#vision" class="nav-link">Vision</a>
+      <a href="#ai-native" class="nav-link">AI Native</a>
+      <a href="#journey" class="nav-link">Journey</a>
+      <a href="#philosophy" class="nav-link">Philosophy</a>
+    </div>
+    <button class="mobile-menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">AI-Native Artist</div>
+        <h1 class="hero-title">ARTREW</h1>
+        <p class="hero-subtitle">
+          <span class="typing-text" id="typing-text"></span><span class="typing-cursor"></span>
+        </p>
+        <p class="hero-tagline">Real Art, Real Brand — EST. 2026</p>
+        <div class="hero-cta">
+          <a href="#vision" class="btn btn-primary">Discover Vision</a>
+          <a href="../articles/" class="btn btn-secondary">Explore Articles</a>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="vision" id="vision">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label reveal">The Dream</span>
+          <h2 class="section-title reveal reveal-delay-1">Crafting Tomorrow</h2>
+          <p class="section-desc reveal reveal-delay-2">
+            AI와 예술의 경계를 허물고, 새로운 창작의 시대를 열어가는 아티스트의 비전
+          </p>
+        </div>
+
+        <div class="vision-grid">
+          <div class="vision-card reveal">
+            <span class="vision-number">01</span>
+            <div class="vision-icon">🎨</div>
+            <h3 class="vision-title">AI Creative Studio</h3>
+            <p class="vision-text">
+              AI와 인간 창의성의 완벽한 융합. 새로운 형태의 예술을 탐구하고
+              창조하는 크리에이티브 스튜디오를 설립합니다.
+            </p>
+          </div>
+
+          <div class="vision-card reveal reveal-delay-1">
+            <span class="vision-number">02</span>
+            <div class="vision-icon">🎓</div>
+            <h3 class="vision-title">Art & AI Academy</h3>
+            <p class="vision-text">
+              다음 세대의 AI 네이티브 아티스트를 육성하는 대학교.
+              기술과 예술의 새로운 교차점에서 미래의 창작자들을 양성합니다.
+            </p>
+          </div>
+
+          <div class="vision-card reveal reveal-delay-2">
+            <span class="vision-number">03</span>
+            <div class="vision-icon">🌍</div>
+            <h3 class="vision-title">Global Vision</h3>
+            <p class="vision-text">
+              국경을 초월한 글로벌 비즈니스. AI 아트의 새로운 기준을 세우고
+              전 세계에 영감을 전달합니다.
+            </p>
+          </div>
+
+          <div class="vision-card reveal reveal-delay-3">
+            <span class="vision-number">04</span>
+            <div class="vision-icon">🧘</div>
+            <h3 class="vision-title">Legacy of Grace</h3>
+            <p class="vision-text">
+              명상과 평온 속에서 인생을 고귀하게 마무리하는 요양원.
+              아버지의 여정을 아름답게 서포트하는 가족의 사명입니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Native Section -->
+    <section class="ai-native" id="ai-native">
+      <div class="ai-native-bg"></div>
+      <div class="section-inner">
+        <div class="ai-showcase">
+          <div class="ai-visual reveal">
+            <div class="ai-ring"></div>
+            <div class="ai-ring"></div>
+            <div class="ai-ring"></div>
+            <div class="ai-orb"></div>
+            <div class="ai-center">
+              <span>🤖</span>
+            </div>
+          </div>
+          <div class="ai-content">
+            <div class="ai-label reveal">The New Standard</div>
+            <h2 class="ai-title reveal reveal-delay-1">
+              AI-Native Artist란 무엇인가
+            </h2>
+            <p class="ai-text reveal reveal-delay-2">
+              단순히 AI 도구를 사용하는 것이 아닙니다. AI와 함께 생각하고,
+              AI와 함께 창조하며, AI 시대의 새로운 예술 언어를 만들어가는 것입니다.
+              기술의 한계를 예술로 승화시키고, 인간 고유의 감성을 디지털 캔버스에 녹여냅니다.
+            </p>
+            <div class="ai-features reveal reveal-delay-3">
+              <div class="ai-feature"><span>✨</span> Creative AI</div>
+              <div class="ai-feature"><span>🔮</span> Future Vision</div>
+              <div class="ai-feature"><span>💡</span> Innovation</div>
+              <div class="ai-feature"><span>🎭</span> Digital Art</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Journey Timeline -->
+    <section class="journey" id="journey">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-label reveal">The Path</span>
+          <h2 class="section-title reveal reveal-delay-1">Journey Ahead</h2>
+          <p class="section-desc reveal reveal-delay-2">
+            꿈을 현실로 만들어가는 여정의 이정표들
+          </p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">2026</div>
+              <h3 class="timeline-title">The Beginning</h3>
+              <p class="timeline-text">
+                ARTREW 브랜드 런칭. AI 네이티브 아티스트로서의 첫 발을 내딛다.
+                콘텐츠 생산 시스템 구축과 브랜드 아이덴티티 확립.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">Phase 2</div>
+              <h3 class="timeline-title">Studio Foundation</h3>
+              <p class="timeline-text">
+                AI 크리에이티브 스튜디오 설립. 숏폼 콘텐츠, 바이럴 마케팅,
+                그리고 AI 기반 창작 시스템의 본격적인 가동.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">Phase 3</div>
+              <h3 class="timeline-title">Academy Launch</h3>
+              <p class="timeline-text">
+                AI 아트 아카데미 개교. 다음 세대의 크리에이터들에게
+                AI와 예술의 융합을 가르치는 교육 기관 설립.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">Vision</div>
+              <h3 class="timeline-title">Global Expansion</h3>
+              <p class="timeline-text">
+                글로벌 네트워크 구축. 전 세계의 AI 아티스트들과 연결되어
+                새로운 형태의 예술 커뮤니티를 형성.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy" id="philosophy">
+      <div class="philosophy-bg"></div>
+      <div class="section-inner">
+        <div class="philosophy-quote reveal">
+          <div class="quote-mark">"</div>
+          <p class="quote-text">
+            진정한 예술은 도구를 넘어선다.<br>
+            AI는 붓이고, 캔버스는 무한하며,<br>
+            영감은 인간 고유의 것이다.
+          </p>
+          <div class="quote-author">— ARTREW</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Legacy Section -->
+    <section class="legacy">
+      <div class="section-inner">
+        <div class="legacy-card reveal glow-hover">
+          <div class="legacy-icon">🕊️</div>
+          <h2 class="legacy-title">A Gift of Gratitude</h2>
+          <p class="legacy-text">
+            성공의 과실은 나눔으로 완성됩니다. 아버지의 평온한 노후를 위한
+            명상 요양원 프로젝트는 단순한 효도를 넘어, 인생의 아름다운 마무리를
+            돕는 공간을 만들고자 하는 비전입니다. 고귀함과 평화 속에서
+            삶을 정리할 수 있는 안식처를 선물하고 싶습니다.
+          </p>
+          <div class="legacy-decoration">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-value" data-count="4">0</div>
+          <div class="stat-label">Major Visions</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-1">
+          <div class="stat-value">AI</div>
+          <div class="stat-label">Native Artist</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-2">
+          <div class="stat-value">∞</div>
+          <div class="stat-label">Possibilities</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-3">
+          <div class="stat-value">1</div>
+          <div class="stat-label">Clear Mission</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+      <h2 class="contact-title reveal">Let's Create Together</h2>
+      <p class="contact-text reveal reveal-delay-1">
+        AI 시대의 새로운 예술을 함께 만들어갈 준비가 되셨나요?
+      </p>
+      <a href="../" class="contact-btn reveal reveal-delay-2">
+        Explore ARTREW →
+      </a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">ARTREW</div>
+    <p class="footer-tagline">Real Art, Real Brand</p>
+    <div class="footer-links">
+      <a href="../" class="footer-link">Home</a>
+      <a href="../articles/" class="footer-link">Articles</a>
+      <a href="../card/" class="footer-link">Card</a>
+    </div>
+    <p class="footer-copyright">© 2026 ARTREW. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ===== LOADER =====
+    const loader = document.getElementById('loader');
+    const loaderProgress = document.getElementById('loader-progress');
+    let progress = 0;
+
+    const loadingInterval = setInterval(() => {
+      progress += Math.random() * 30;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(loadingInterval);
+        setTimeout(() => {
+          loader.classList.add('hidden');
+        }, 300);
+      }
+      loaderProgress.style.width = progress + '%';
+    }, 100);
+
+    // ===== CUSTOM CURSOR =====
+    const cursor = document.getElementById('cursor');
+    const cursorDot = document.getElementById('cursor-dot');
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+
+      setTimeout(() => {
+        cursorDot.style.left = e.clientX + 'px';
+        cursorDot.style.top = e.clientY + 'px';
+      }, 50);
+    });
+
+    document.querySelectorAll('a, button, .vision-card, .timeline-content, .ai-feature').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    // ===== PARTICLES =====
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.5 + 0.1;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    const particles = Array.from({ length: 80 }, () => new Particle());
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // ===== NAVIGATION VISIBILITY =====
+    const nav = document.getElementById('nav');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > 100) {
+        nav.classList.add('visible');
+      } else {
+        nav.classList.remove('visible');
+      }
+
+      lastScroll = currentScroll;
+    });
+
+    // ===== TYPING EFFECT =====
+    const typingElement = document.getElementById('typing-text');
+    const phrases = [
+      'Where AI Meets Artistry',
+      'Dreaming Beyond Boundaries',
+      'Creating the Future of Art',
+      'AI-Native, Human at Heart'
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+      const currentPhrase = phrases[phraseIndex];
+
+      if (isDeleting) {
+        typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let typeSpeed = isDeleting ? 30 : 80;
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 500;
+      }
+
+      setTimeout(typeEffect, typeSpeed);
+    }
+
+    setTimeout(typeEffect, 1500);
+
+    // ===== SCROLL REVEAL =====
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ===== SMOOTH SCROLL =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // ===== COUNTER ANIMATION =====
+    const statValues = document.querySelectorAll('.stat-value[data-count]');
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const count = parseInt(target.dataset.count);
+          let current = 0;
+          const duration = 2000;
+          const increment = count / (duration / 16);
+
+          const updateCounter = () => {
+            current += increment;
+            if (current < count) {
+              target.textContent = Math.floor(current);
+              requestAnimationFrame(updateCounter);
+            } else {
+              target.textContent = count;
+            }
+          };
+
+          updateCounter();
+          counterObserver.unobserve(target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statValues.forEach(el => counterObserver.observe(el));
+
+    // ===== PARALLAX ON MOUSE MOVE =====
+    document.addEventListener('mousemove', (e) => {
+      const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+      const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+
+      document.querySelectorAll('.ai-ring').forEach((ring, i) => {
+        const factor = (i + 1) * 0.5;
+        ring.style.transform = `rotate(${moveX * factor}deg) translate(${moveX * factor}px, ${moveY * factor}px)`;
+      });
+    });
+
+    // ===== VISION CARD 3D TILT =====
+    document.querySelectorAll('.vision-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+      });
+    });
+
+    // ===== MAGNETIC BUTTONS =====
+    document.querySelectorAll('.btn, .contact-btn').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0, 0)';
+      });
+    });
+
+    // ===== PROGRESS BAR ON SCROLL =====
+    const progressBar = document.createElement('div');
+    progressBar.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #D4AF37, #F4E4A6);
+      z-index: 10001;
+      transition: width 0.1s ease;
+    `;
+    document.body.appendChild(progressBar);
+
+    window.addEventListener('scroll', () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollProgress = (window.pageYOffset / scrollHeight) * 100;
+      progressBar.style.width = scrollProgress + '%';
+    });
+
+    // ===== PRELOAD COMPLETE =====
+    window.addEventListener('load', () => {
+      loaderProgress.style.width = '100%';
+      setTimeout(() => {
+        loader.classList.add('hidden');
+      }, 500);
+    });
+  </script>
 </body>
 </html>
