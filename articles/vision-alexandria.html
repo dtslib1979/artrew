@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alexandria Sanctuary Vision — Where Wisdom Meets Rest | ARTREW</title>
+  <meta name="description" content="Supporting Father's 21st Century Sanctuary: A Place of Contemplation and Care">
+  <link rel="icon" href="../assets/icons/Artrew-logo.png">
+  <link rel="apple-touch-icon" href="../assets/icons/Artrew-logo.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+    :root {
+      --bg: #0a0f0d;
+      --bg-elevated: #0f1612;
+      --accent: #10B981;
+      --accent-light: #34D399;
+      --accent-glow: rgba(16, 185, 129, 0.25);
+      --gold: #D4AF37;
+      --text: #f5f5f0;
+      --text-muted: rgba(245, 245, 240, 0.6);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* Hero - Full Screen with Gradient Overlay */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 40px 20px;
+      background:
+        linear-gradient(180deg, transparent 0%, var(--bg) 100%),
+        radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 60%);
+    }
+
+    .hero-mist {
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="f"><feGaussianBlur stdDeviation="2"/></filter></defs><circle cx="20" cy="30" r="15" fill="%2310B98115" filter="url(%23f)"/><circle cx="70" cy="60" r="20" fill="%2310B98110" filter="url(%23f)"/><circle cx="40" cy="80" r="12" fill="%2310B98112" filter="url(%23f)"/></svg>');
+      background-size: 300px;
+      animation: mistFloat 30s linear infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes mistFloat {
+      0% { transform: translateX(0) translateY(0); }
+      100% { transform: translateX(-100px) translateY(-50px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .hero-symbol {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+
+    .hero-symbol::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      animation: symbolPulse 4s ease-in-out infinite;
+    }
+
+    .hero-symbol::after {
+      content: '☯';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      filter: drop-shadow(0 0 20px var(--accent-glow));
+    }
+
+    @keyframes symbolPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 32px;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title .emphasis {
+      font-style: italic;
+      color: var(--accent-light);
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    /* Quote Section */
+    .wisdom-quote {
+      padding: 120px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-style: italic;
+      font-weight: 400;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .quote-text em {
+      font-style: normal;
+      color: var(--accent-light);
+    }
+
+    .quote-source {
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* Five Pillars */
+    .pillars {
+      padding: 100px 20px;
+      background: var(--bg-elevated);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pillar-card {
+      padding: 40px 32px;
+      background: rgba(16, 185, 129, 0.03);
+      border: 1px solid rgba(16, 185, 129, 0.1);
+      border-radius: 20px;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: default;
+    }
+
+    .pillar-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(16, 185, 129, 0.15);
+    }
+
+    .pillar-icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+      filter: grayscale(0.3);
+      transition: filter 0.3s;
+    }
+
+    .pillar-card:hover .pillar-icon {
+      filter: grayscale(0);
+    }
+
+    .pillar-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .pillar-korean {
+      font-size: 13px;
+      color: var(--accent-light);
+      margin-bottom: 16px;
+      letter-spacing: 0.1em;
+    }
+
+    .pillar-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Family Connection */
+    .connection {
+      padding: 120px 20px;
+    }
+
+    .connection-content {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .connection-icon {
+      font-size: 64px;
+      margin-bottom: 32px;
+      opacity: 0.8;
+    }
+
+    .connection-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    .connection-title .highlight {
+      color: var(--gold);
+    }
+
+    .connection-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      line-height: 1.9;
+    }
+
+    /* Location */
+    .location {
+      padding: 80px 20px;
+      background: var(--bg-elevated);
+      text-align: center;
+    }
+
+    .location-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .location-meaning {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* CTA */
+    .cta {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 36px;
+      background: transparent;
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      color: var(--accent-light);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: all 0.4s;
+    }
+
+    .cta-button:hover {
+      background: var(--accent);
+      color: var(--bg);
+      box-shadow: 0 15px 50px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Back */
+    .back-link {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+      z-index: 100;
+    }
+
+    .back-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent);
+    }
+
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="../" class="back-link">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    ARTREW
+  </a>
+
+  <section class="hero">
+    <div class="hero-mist"></div>
+    <div class="hero-content">
+      <div class="hero-symbol"></div>
+      <div class="hero-badge">ARTREW × Alexandria Sanctuary</div>
+      <h1 class="hero-title">
+        Where Wisdom<br>Meets <span class="emphasis">Rest</span>
+      </h1>
+      <p class="hero-subtitle">
+        Supporting a father's vision — a 21st century sanctuary
+        for contemplation, care, and the art of graceful transition.
+      </p>
+    </div>
+  </section>
+
+  <section class="wisdom-quote">
+    <blockquote class="quote-text">
+      "Preparing for death is not morbid —<br>
+      it is the most <em>life-affirming</em> act."
+    </blockquote>
+    <p class="quote-source">— Alexandria Philosophy</p>
+  </section>
+
+  <section class="pillars">
+    <div class="section-header">
+      <p class="section-label">The Five Pillars</p>
+      <h2 class="section-title">A Holistic Sanctuary</h2>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-card fade-in">
+        <div class="pillar-icon">🏔️</div>
+        <h3 class="pillar-name">Cave Retreats</h3>
+        <p class="pillar-korean">동굴수행</p>
+        <p class="pillar-desc">Deep meditation in natural and crafted cave spaces, following ancient contemplative traditions.</p>
+      </div>
+
+      <div class="pillar-card fade-in">
+        <div class="pillar-icon">🎭</div>
+        <h3 class="pillar-name">Forum</h3>
+        <p class="pillar-korean">지혜의 광장</p>
+        <p class="pillar-desc">Global dialogues with wisdom teachers, philosophers, and contemplatives through intimate gatherings.</p>
+      </div>
+
+      <div class="pillar-card fade-in">
+        <div class="pillar-icon">📚</div>
+        <h3 class="pillar-name">Library</h3>
+        <p class="pillar-korean">영혼의 서재</p>
+        <p class="pillar-desc">Curated archive of teachings on death, dying, and the art of living fully.</p>
+      </div>
+
+      <div class="pillar-card fade-in">
+        <div class="pillar-icon">🤲</div>
+        <h3 class="pillar-name">Care</h3>
+        <p class="pillar-korean">돌봄의 집</p>
+        <p class="pillar-desc">Holistic residential care combining medical excellence with spiritual companionship.</p>
+      </div>
+
+      <div class="pillar-card fade-in">
+        <div class="pillar-icon">✨</div>
+        <h3 class="pillar-name">Legacy</h3>
+        <p class="pillar-korean">유산 프로젝트</p>
+        <p class="pillar-desc">Life review and digital legacy services to preserve wisdom for future generations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="connection">
+    <div class="connection-content fade-in">
+      <div class="connection-icon">👨‍👦</div>
+      <h2 class="connection-title">
+        A <span class="highlight">Son's</span> Support
+      </h2>
+      <p class="connection-desc">
+        Alexandria is more than a partner — it is family.<br><br>
+        ARTREW brings AI-native creativity to support Father's vision:
+        a sanctuary where technology serves humanity's deepest needs,
+        where digital innovation meets timeless wisdom,
+        and where the final chapter of life becomes its most beautiful.
+      </p>
+    </div>
+  </section>
+
+  <section class="location">
+    <h3 class="location-name">팔공산 · Palgongsan</h3>
+    <p class="location-meaning">"The Mountain of Eight Merits" — A pilgrimage site for over 1,000 years</p>
+  </section>
+
+  <section class="cta">
+    <a href="https://dtslib1979.github.io/alexandria-sanctuary/" target="_blank" class="cta-button">
+      <span>Visit Alexandria Sanctuary</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </section>
+
+  <script>
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 100);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Parallax effect on scroll
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const mist = document.querySelector('.hero-mist');
+      if (mist) {
+        mist.style.transform = `translateY(${scrolled * 0.3}px)`;
+      }
+    });
+  </script>
+</body>
+</html>

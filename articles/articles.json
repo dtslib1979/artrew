@@ -1,23 +1,23 @@
 {
   "articles": [
     {
-      "file": "1500.html",
-      "title": "1500원 환율 시대가 시사하는 바",
-      "description": "",
+      "file": "vision-parksy.html",
+      "title": "PARKSY — The Future of Creative Production",
+      "description": "AI-Powered Visual Production Pipeline: From Sketch to Cinema",
       "date": "2026-01-22",
       "status": "published"
     },
     {
-      "file": "investor-deck.html",
-      "title": "ARTREW — Investor Deck",
-      "description": "ARTREW - Real Art, Real Brand | Bluffing based editing broadcasting CELEB story",
+      "file": "vision-eae.html",
+      "title": "EAE University — The 21st Century Academy",
+      "description": "Founding Dean of the AI-Native University: Where Knowledge Meets Neural Networks",
       "date": "2026-01-22",
-      "status": "draft"
+      "status": "published"
     },
     {
-      "file": "실버90.html",
-      "title": "Artrew Manifesto — Not Human. Not Machine. Art",
-      "description": "Artrew Manifesto — Not Human. Not Machine. Art",
+      "file": "vision-alexandria.html",
+      "title": "Alexandria — Where Wisdom Meets Rest",
+      "description": "Supporting Father's 21st Century Sanctuary: A Place of Contemplation and Care",
       "date": "2026-01-22",
       "status": "published"
     }

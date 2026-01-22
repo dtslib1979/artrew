@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PARKSY Vision — The Future of Creative Production | ARTREW</title>
+  <meta name="description" content="AI-Powered Visual Production Pipeline: From Sketch to Cinema">
+  <link rel="icon" href="../assets/icons/Artrew-logo.png">
+  <link rel="apple-touch-icon" href="../assets/icons/Artrew-logo.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --bg: #0a0a0f;
+      --bg-elevated: #12121a;
+      --accent: #FF6B9D;
+      --accent-glow: rgba(255, 107, 157, 0.3);
+      --gold: #D4AF37;
+      --text: #f5f5f5;
+      --text-muted: rgba(245, 245, 245, 0.6);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, var(--accent-glow) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(99, 102, 241, 0.2) 0%, transparent 50%);
+      animation: bgPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes bgPulse {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.1); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(255, 107, 157, 0.1);
+      border: 1px solid rgba(255, 107, 157, 0.3);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 32px;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .hero-title .highlight {
+      background: linear-gradient(135deg, var(--accent), #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      animation: fadeInUp 1s ease 0.4s both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* Pipeline Section */
+    .pipeline {
+      padding: 120px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .pipeline-flow {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .pipeline-step {
+      flex: 1;
+      min-width: 180px;
+      max-width: 200px;
+      padding: 32px 24px;
+      background: var(--bg-elevated);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      text-align: center;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .pipeline-step:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 60px rgba(255, 107, 157, 0.2);
+    }
+
+    .pipeline-step::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -25px;
+      width: 30px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0.5;
+    }
+
+    .pipeline-step:last-child::after {
+      display: none;
+    }
+
+    .step-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--accent), #a855f7);
+      border-radius: 16px;
+      font-size: 24px;
+    }
+
+    .step-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Tools Integration */
+    .tools {
+      padding: 120px 20px;
+      background: var(--bg-elevated);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .tool-card {
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .tool-card:hover {
+      background: rgba(255, 107, 157, 0.05);
+      border-color: var(--accent);
+      transform: scale(1.05);
+    }
+
+    .tool-name {
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .tool-type {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Vision Statement */
+    .vision {
+      padding: 160px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .vision-quote {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 300;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .vision-quote em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .vision-attribution {
+      margin-top: 32px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* CTA */
+    .cta {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--accent), #a855f7);
+      border: none;
+      border-radius: 100px;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .cta-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 40px rgba(255, 107, 157, 0.4);
+    }
+
+    /* Back Link */
+    .back-link {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+      z-index: 100;
+    }
+
+    .back-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .pipeline-step::after {
+        display: none;
+      }
+
+      .pipeline-step {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="../" class="back-link">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    ARTREW
+  </a>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>ARTREW × PARKSY</span>
+      </div>
+      <h1 class="hero-title">
+        The Future of<br>
+        <span class="highlight">Creative Production</span>
+      </h1>
+      <p class="hero-subtitle">
+        From sketch to cinema in one seamless pipeline.
+        AI-powered visual production that transforms imagination into reality.
+      </p>
+    </div>
+    <div class="scroll-indicator">
+      <span>SCROLL</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M19 12l-7 7-7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="pipeline">
+    <div class="section-header">
+      <p class="section-label">Production Pipeline</p>
+      <h2 class="section-title">Six Stages of Creation</h2>
+    </div>
+
+    <div class="pipeline-flow">
+      <div class="pipeline-step" data-step="1">
+        <div class="step-icon">✏️</div>
+        <h3 class="step-title">Sketch</h3>
+        <p class="step-desc">Initial concept visualization</p>
+      </div>
+      <div class="pipeline-step" data-step="2">
+        <div class="step-icon">🎨</div>
+        <h3 class="step-title">Generate</h3>
+        <p class="step-desc">AI image creation</p>
+      </div>
+      <div class="pipeline-step" data-step="3">
+        <div class="step-icon">✨</div>
+        <h3 class="step-title">Refine</h3>
+        <p class="step-desc">Edit & enhance</p>
+      </div>
+      <div class="pipeline-step" data-step="4">
+        <div class="step-icon">☁️</div>
+        <h3 class="step-title">Upload</h3>
+        <p class="step-desc">Cloud storage</p>
+      </div>
+      <div class="pipeline-step" data-step="5">
+        <div class="step-icon">🎭</div>
+        <h3 class="step-title">Compose</h3>
+        <p class="step-desc">Scene arrangement</p>
+      </div>
+      <div class="pipeline-step" data-step="6">
+        <div class="step-icon">🎬</div>
+        <h3 class="step-title">Render</h3>
+        <p class="step-desc">Video output</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tools">
+    <div class="section-header">
+      <p class="section-label">Integrated Tools</p>
+      <h2 class="section-title">Best-in-Class AI Stack</h2>
+    </div>
+
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-name">DALL-E 3</div>
+        <div class="tool-type">Image Gen</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Gemini</div>
+        <div class="tool-type">Multi-modal</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Sora</div>
+        <div class="tool-type">Video Gen</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Grok</div>
+        <div class="tool-type">Creative AI</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">remove.bg</div>
+        <div class="tool-type">Background</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">GitHub</div>
+        <div class="tool-type">Storage</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vision">
+    <blockquote class="vision-quote">
+      "In the age of AI, creativity is not about <em>making</em> —<br>
+      it's about <em>orchestrating</em>."
+    </blockquote>
+    <p class="vision-attribution">— ARTREW Manifesto</p>
+  </section>
+
+  <section class="cta">
+    <a href="https://dtslib1979.github.io/parksy-image/" target="_blank" class="cta-button">
+      <span>Experience PARKSY Studio</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </section>
+
+  <script>
+    // Intersection Observer for animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.pipeline-step, .tool-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      observer.observe(el);
+    });
+
+    // Stagger animation
+    document.querySelectorAll('.pipeline-step').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.1}s`;
+    });
+
+    document.querySelectorAll('.tool-card').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.05}s`;
+    });
+  </script>
+</body>
+</html>
