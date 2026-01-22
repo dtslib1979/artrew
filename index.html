@@ -1670,15 +1670,45 @@
     }
 
     .legend-dot.artrew { background: var(--gold); }
-    .legend-dot.mathq { background: #4ECDC4; }
-    .legend-dot.sjoonmo { background: #A78BFA; }
-    .legend-dot.quicksilver { background: #C0C0C0; }
+    .legend-dot.parksy { background: #FF6B9D; }
+    .legend-dot.eae { background: #6366F1; }
+    .legend-dot.alexandria { background: #10B981; }
 
     .graph-hint {
       text-align: center;
       font-size: 11px;
       color: var(--text-muted);
       margin-top: 12px;
+    }
+
+    .graph-tooltip {
+      position: absolute;
+      background: rgba(15, 31, 21, 0.95);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--text);
+      font-size: 12px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 100;
+      max-width: 220px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .graph-tooltip.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .graph-tooltip .tooltip-label {
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .graph-tooltip .tooltip-desc {
+      color: var(--text-secondary);
+      line-height: 1.4;
     }
 
     /* Affiliate Cards - Hidden (moved to individual pages) */
@@ -1698,9 +1728,9 @@
       border-color: var(--gold);
     }
 
-    .affiliate-card[data-affiliate="mathq"]:hover { border-color: #4ECDC4; }
-    .affiliate-card[data-affiliate="sjoonmo"]:hover { border-color: #A78BFA; }
-    .affiliate-card[data-affiliate="quicksilver"]:hover { border-color: #C0C0C0; }
+    .affiliate-card[data-affiliate="parksy"]:hover { border-color: #FF6B9D; }
+    .affiliate-card[data-affiliate="eae"]:hover { border-color: #6366F1; }
+    .affiliate-card[data-affiliate="alexandria"]:hover { border-color: #10B981; }
 
     .affiliate-header {
       display: flex;
@@ -2058,6 +2088,7 @@
     <!-- Graph View - Main Display -->
     <div class="graph-container" id="graphContainer">
       <canvas id="graphCanvas"></canvas>
+      <div class="graph-tooltip" id="graphTooltip"></div>
     </div>
   </section>
 
@@ -2292,10 +2323,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Node data with URLs and images
   var nodes = [
-    { id: 'artrew', label: 'ARTREW', color: '#D4AF37', url: './affiliates/artrew.html', img: './assets/icons/Artrew-logo.png', radius: 45, x: 0, y: 0, vx: 0, vy: 0, image: null },
-    { id: 'mathq', label: 'MathQ', color: '#4ECDC4', url: './affiliates/mathq.html', img: './assets/2.jpg', radius: 38, x: 0, y: 0, vx: 0, vy: 0, image: null },
-    { id: 'sjoonmo', label: 'S-Joonmo', color: '#A78BFA', url: './affiliates/sjoonmo.html', img: './assets/3.jpg', radius: 38, x: 0, y: 0, vx: 0, vy: 0, image: null },
-    { id: 'quicksilver', label: 'QuickSilver', color: '#C0C0C0', url: './affiliates/quicksilver.html', img: './assets/4.jpg', radius: 38, x: 0, y: 0, vx: 0, vy: 0, image: null }
+    { id: 'artrew', label: 'ARTREW', color: '#D4AF37', url: './affiliates/artrew.html', img: './assets/icons/Artrew-logo.png', radius: 45, x: 0, y: 0, vx: 0, vy: 0, image: null, desc: 'Not Human. Not Machine. Art.' },
+    { id: 'parksy', label: 'PARKSY', color: '#FF6B9D', url: 'https://dtslib1979.github.io/parksy-image/', img: './assets/icons/parksy-icon.jpg', radius: 38, x: 0, y: 0, vx: 0, vy: 0, image: null, desc: 'Image Studio — Webtoon · Fashion · CAD Design' },
+    { id: 'eae', label: 'EAE Univ', color: '#6366F1', url: 'https://dtslib1979.github.io/eae-univ/', img: './assets/icons/eae-univ-icon.svg', radius: 38, x: 0, y: 0, vx: 0, vy: 0, image: null, desc: '21st Century AI University — Founding Dean' },
+    { id: 'alexandria', label: 'Alexandria', color: '#10B981', url: 'https://dtslib1979.github.io/alexandria-sanctuary/', img: './assets/icons/alexandria-emblem.svg', radius: 38, x: 0, y: 0, vx: 0, vy: 0, image: null, desc: 'Sanctuary — Senior Care & Wellness' }
   ];
 
   // Load images
@@ -2494,13 +2525,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Change cursor on hover
+  // Change cursor on hover and show tooltip
+  var tooltip = document.getElementById('graphTooltip');
   canvas.addEventListener('mousemove', function(e) {
     var rect = canvas.getBoundingClientRect();
     var x = e.clientX - rect.left;
     var y = e.clientY - rect.top;
     var node = getNodeAtPosition(x, y);
     canvas.style.cursor = node ? 'pointer' : 'default';
+
+    if (node) {
+      tooltip.innerHTML = '<div class="tooltip-label">' + node.label + '</div><div class="tooltip-desc">' + node.desc + '</div>';
+      tooltip.style.left = (e.clientX - rect.left + 15) + 'px';
+      tooltip.style.top = (e.clientY - rect.top - 10) + 'px';
+      tooltip.classList.add('show');
+    } else {
+      tooltip.classList.remove('show');
+    }
+  });
+
+  canvas.addEventListener('mouseleave', function() {
+    tooltip.classList.remove('show');
   });
 
   // Auto-start on load - continuous animation
