@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "name": "ARTREW 미대생 길드",
+    "description": "AI 시대 미대생/디자이너 12슬롯 길드",
+    "industry": "design",
+    "totalSlots": 12,
+    "version": "1.0.0",
+    "updatedAt": "2026-02-06"
+  },
+  "slots": [
+    {
+      "id": "slot01",
+      "status": "active",
+      "type": "anchor",
+      "member": {
+        "name": "길드장",
+        "fullName": "ARTREW 길드장",
+        "avatar": "A",
+        "photo": "/assets/members/guildmaster.png",
+        "title": "미대생 길드 길드장",
+        "tagline": "AI 시대 아티스트의 새로운 기준"
+      },
+      "contact": {
+        "phone": "",
+        "email": "artrew@artrew.com"
+      },
+      "social": {
+        "youtube": "",
+        "blog": ""
+      },
+      "joinedAt": "2026-02-06",
+      "theme": "gold"
+    },
+    {
+      "id": "slot02",
+      "status": "empty",
+      "type": "paid",
+      "member": null,
+      "contact": null
+    },
+    {
+      "id": "slot03",
+      "status": "empty",
+      "type": "paid",
+      "member": null,
+      "contact": null
+    },
+    {
+      "id": "slot04",
+      "status": "empty",
+      "type": "paid",
+      "member": null,
+      "contact": null
+    },
+    {
+      "id": "slot05",
+      "status": "empty",
+      "type": "paid",
+      "member": null,
+      "contact": null
+    },
+    {
+      "id": "slot06",
+      "status": "empty",
+      "type": "paid",
+      "member": null,
+      "contact": null
+    },
+    {
+      "id": "slot07",
+      "status": "empty",
+      "type": "paid",
+      "member": null,
+      "contact": null
+    },
+    {
+      "id": "slot08",
+      "status": "empty",
+      "type": "paid",
+      "member": null,
+      "contact": null
+    },
+    {
+      "id": "slot09",
+      "status": "empty",
+      "type": "paid",
+      "member": null,
+      "contact": null
+    },
+    {
+      "id": "slot10",
+      "status": "empty",
+      "type": "paid",
+      "member": null,
+      "contact": null
+    },
+    {
+      "id": "slot11",
+      "status": "empty",
+      "type": "paid",
+      "member": null,
+      "contact": null
+    },
+    {
+      "id": "slot12",
+      "status": "empty",
+      "type": "paid",
+      "member": null,
+      "contact": null
+    }
+  ]
+}
